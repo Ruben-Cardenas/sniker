@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tienda de Tenis</title>
-    <link rel="stylesheet" href="styles.css">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
 </head>
 <body>
     <header class="encabezado">
@@ -14,7 +15,7 @@
             <img src="assets/slider/T3.jpg" alt="encabezado3" class="slide">
         </div>
         <div class="carrito">
-            <a href="carrito.html"><img src="assets/imagenes/Carrito.jpeg" alt="Carrito de compras"></a>
+            <a href="{% url "carritoview" %}"><img src="assets/imagenes/Carrito.jpeg" alt="Carrito de compras"></a>
             <span id="cart-count">0</span>
         </div>
     </header>
@@ -53,7 +54,7 @@
                 <button class="comprar-btn" onclick="agregarAlCarrito('Tenis Casual Urban', 1600, document.getElementById('cantidad2').value)">Comprar</button>
             </div>
             <div class="productos">
-                <img src="assets/imagenes/producto 3.jpg" alt="Tenis 3">
+                <img src="{% static 'static/imagenes/Producto/producto 3.jpg' %}" alt="Tenis 3">
                 <h3>Tenis de Lujo Elite</h3>
                 <p>Confeccionados con materiales premium, estos tenis combinan elegancia y comodidad para cualquier ocasión especial.</p>
                 <p class="precio">$1700.00</p>

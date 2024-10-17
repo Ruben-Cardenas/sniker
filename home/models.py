@@ -11,6 +11,8 @@ class Producto(models.Model):
     def __str__(self):
         return self.nombre
 
+from django.db import models
+
 class Carrito(models.Model):
     producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
     cantidad = models.IntegerField(default=1)
