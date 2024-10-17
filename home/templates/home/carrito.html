@@ -17,7 +17,7 @@
         <div id="lista-carrito">
             <!-- Los productos añadidos al carrito aparecerán aquí -->
         </div>
-        <button id="checkout-btn" onclick="window.location.href='pago.html'">Proceder al Pago</button>
+        <button id="checkout-btn" onclick="window.location.href='{% url 'pagoview' %}'">Proceder al Pago</button>
     </section>
 
     <script>
@@ -34,10 +34,8 @@
                 const div = document.createElement('div');
                 div.className = 'producto-en-carrito';
                 div.innerHTML = `
-    
                     <div class="producto-info">
-                       <img src="assets/imagenes/${producto.imagen}" alt="${producto.producto}">
-
+                        <img src="{% static 'assets/imagenes/' %}${producto.imagen}" alt="${producto.producto}">
                         <h3>${producto.producto}</h3>
                         <p>Descripción: ${producto.descripcion}</p>
                         <p>Precio: $${producto.precio}</p>
@@ -50,4 +48,3 @@
     </script>
 </body>
 </html>
-

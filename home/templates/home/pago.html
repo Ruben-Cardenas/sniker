@@ -52,7 +52,7 @@
         document.getElementById('confirmar-pago').onclick = function() {
             alert('Pago confirmado. Gracias por tu compra!');
             localStorage.removeItem('carrito');
-            window.location.href = 'index.html';
+            window.location.href = '{% url "homeview" %}';
         };
     </script>
 </body>
