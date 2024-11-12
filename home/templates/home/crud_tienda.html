@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administración de Productos - Tienda de Tenis</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <header class="encabezado">
+        <div class="slider">
+            <img src="{% static 'assets/slider/T1.jpg' %}" alt="encabezado1" class="slide active">
+            <img src="{% static 'assets/slider/T2.jpg' %}" alt="encabezado2" class="slide">
+            <img src="{% static 'assets/slider/T3.jpg' %}" alt="encabezado3" class="slide">
+        </div>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#Inicio">Inicio</a></li>
+            <li><a href="#galeria-productos">Productos</a></li>
+            <li><a href="#administrar-productos">Administrar Productos</a></li>
+        </ul>
+    </nav>
+
+    <!-- Sección de inicio -->
+    <section id="Inicio">
+        <h1>Bienvenido al Panel de Administración</h1>
+    </section>
+
+    <!-- Sección de administración de productos -->
+    <section id="administrar-productos">
+        <h2>Administrar Productos</h2>
+        
+        <div class="formulario">
+            <h3>Agregar/Editar Producto</h3>
+            <form action="{% url 'administrar_productos' %}" method="post">
+                {% csrf_token %}
+                <label for="nombre">Nombre del Producto:</label>
+                <input type="text" name="nombre" id="nombre" required>
+
+                <label for="descripcion">Descripción:</label>
+                <textarea name="descripcion" id="descripcion" required></textarea>
+
+                <label for="precio">Precio:</label>
+                <input type="number" name="precio" id="precio" step="0.01" required>
+
+                <label for="disponible">Disponible:</label>
+                <select name="disponible" id="disponible">
+                    <option value="True">Sí</option>
+                    <option value="False">No</option>
+                </select>
+
+                <button type="submit">Guardar Producto</button>
+            </form>
+        </div>
+
+        <h3>Productos Actuales</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th>Precio</th>
+                    <th>Disponible</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for producto in productos %}
+                <tr>
+                    <td>{{ producto.nombre }}</td>
+                    <td>{{ producto.descripcion }}</td>
+                    <td>${{ producto.precio }}</td>
+                    <td>{{ producto.disponible|yesno:"Sí,No" }}</td>
+                    <td>
+                        <!-- Botones de acciones: Editar y Eliminar -->
+                        <button onclick="editarProducto('{{ producto.id }}', '{{ producto.nombre }}', '{{ producto.descripcion }}', '{{ producto.precio }}', '{{ producto.disponible }}')">Editar</button>
+                        <form action="{% url 'eliminar_producto' producto.id %}" method="post" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit" onclick="return confirm('¿Estás seguro de eliminar este producto?')">Eliminar</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
+
+    <script>
+        function editarProducto(id, nombre, descripcion, precio, disponible) {
+            document.getElementById('nombre').value = nombre;
+            document.getElementById('descripcion').value = descripcion;
+            document.getElementById('precio').value = precio;
+            document.getElementById('disponible').value = disponible ? "True" : "False";
+            // Cambiar la acción del formulario para editar
+            document.querySelector('form').action = "{% url 'editar_producto' id %}";
+        }
+    </script>
+</body>
+</html

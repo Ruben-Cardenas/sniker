@@ -1,0 +1,99 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administración - Tienda de Tenis</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7fafc;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #5a67d8;
+            color: white;
+        }
+        button {
+            padding: 8px 12px;
+            background-color: #5a67d8;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #4c51bf;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Panel de Administración</h2>
+        <p>Gestiona los permisos de los usuarios:</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre de Usuario</th>
+                    <th>Correo Electrónico</th>
+                    <th>Rol</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>usuario1</td>
+                    <td>usuario1@correo.com</td>
+                    <td>Cliente</td>
+                    <td>
+                        <button onclick="cambiarRol(this, 'Administrador')">Convertir en Admin</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>admin1</td>
+                    <td>admin1@correo.com</td>
+                    <td>Administrador</td>
+                    <td>
+                        <button onclick="cambiarRol(this, 'Cliente')">Convertir en Cliente</button>
+                    </td>
+                </tr>
+                <!-- Agregar más usuarios aquí -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function cambiarRol(button, nuevoRol) {
+            let row = button.parentNode.parentNode;
+            let rolCelda = row.cells[2];
+            rolCelda.innerText = nuevoRol;
+            button.innerText = nuevoRol === 'Administrador' ? 'Convertir en Cliente' : 'Convertir en Admin';
+            button.setAttribute("onclick", `cambiarRol(this, '${nuevoRol === 'Administrador' ? 'Cliente' : 'Administrador'}')`);
+        }
+    </script>
+</body>
+</html>

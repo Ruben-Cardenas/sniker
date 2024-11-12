@@ -11,4 +11,11 @@ def carritoview(request):
 def pagoview(request):
     return render(request,'home/pago.html')
 
+def secionview(request):
+    return render(request,'home/secion.html')
 
+def adminview(request):
+    return render(request,'home/admin.html')
+
+def crud_tiendaview(request):
+    return render(request,'home/crud_tienda')
